@@ -1,0 +1,9 @@
+Utilizaremos un componente principal que será Reloj y dos componentes que se utilizarán dentro de él que será el de RelojDisplay y HoraList
+
+Reloj contendrá un useState de tipo string para almacenar la hora que leamos con la funcion toLocaleTimeString(). Será un useState porque queremos que cada vez que se cambie la hora con la llamada del método anterior se vuelva a renderizar la pagina con ese nuevo valor leido.
+
+Tendrá otro useState que será una lista de objetos de tipo Item que es una interfaz que crearemos para albergar un id que identifique a cada hora que guardamos y una hora. El id lo necesitaremos para recorrer la lista guardada con el metodo map ya que este necesita de un id para identificar cada elemento de la lista para poder representarlo en el DOM
+
+Reloj también contendrá un useEffect con el segunto argumento con  un array vacio([]), esto hará que al monstarse el componente llamaremos a setInterval que se ejecutará a cada segundo y dentro de este se ejecutará el setTime del primer useState comentado que tomará un nuevo valor de la hora para que lo renderice React al notificar UseState los cambios en la variable que contenga la hora.
+
+El componente Reloj también tendrá una función que se ejecute cada vez que pulsamos un botón para poder guardar la hora en la lista de objetos de tipo item comentado en el segundo useState, la llamaremos guardarHora y lo que hará será tomar valor del id y la hora en el momento que se pulsa el boton y se añadirá ese valor a la lista que albergan las horas guardadas mediante la funcion set su useState. Esto se hace para que React sepa que la lista de horas ha cambiado y que debe renderizar de nuevo el componente Reloj
