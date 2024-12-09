@@ -46,9 +46,11 @@ const Reloj:React.FC = ():JSX.Element=>{
     }
 
     const eliminarHora = (id:number)=>{
+        //Con el metodo filter obtenemos todos los item de la lista excepto el que vamos a eliminar
+        //y guardamos esa lista filtrada en listaHoras con setListasHoras
         setlistaHoras(listaHoras.filter((item)=> item.id !== id))
     }
-    
+
     return(
         <>
             <RelojDisplay time={time}/>
