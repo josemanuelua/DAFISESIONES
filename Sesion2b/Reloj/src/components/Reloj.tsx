@@ -9,7 +9,12 @@ interface Item{
 
 const Reloj:React.FC = ():JSX.Element=>{
     const [time, setTime]= useState<string>(new Date().toLocaleTimeString());
-    const [listaHoras, setlistaHoras] = useState<Item[]>([]);
+    const [listaHoras, setlistaHoras] = useState<Item[]>(()=>{
+        //Intentamos inicializar listaHoras con el Item del localStorage listaHoras
+        //Sino lo encuentra inicializamos listaHoras como un array vacio
+        const horasGuardadas= localStorage.getItem('listaHoras'); 
+        return horasGuardadas ? JSON.parse(horasGuardadas): [];
+    });
     //Con el segundo argumento como [] lo que hacemos es que solo se ejecuta al montar el componente
     //Cuando se ejecuta llamara a un setTime y espera un segundo y hace que el estado time se actualice,
     // lo que hará que se renderice la pagina de nuevo con el uevo valor de time y asi cada segundo.
@@ -24,6 +29,12 @@ const Reloj:React.FC = ():JSX.Element=>{
             clearInterval(intervalo);
         }
     },[]);
+
+    //Comprobamos con useEffect si listaHoras cambia, cada vez que cambie, actualizamos el item listaHoras
+    //del localSorage
+    useEffect(()=>{
+        localStorage.setItem('listaHoras', JSON.stringify(listaHoras));
+    }, [listaHoras])
 
     const guardarHora = () => {
         //Cada vez que pulsamos el botón se llama a esta funcion que inicializa nuevaHora con la longitud
