@@ -6,9 +6,10 @@ interface Item {
 
 interface HoraListProps{
     listaHoras: Item[];
+    eliminarHora: (id:number)=>void
 }
 
-const HoraList:React.FC<HoraListProps> = ({listaHoras}) =>{
+const HoraList:React.FC<HoraListProps> = ({listaHoras, eliminarHora}) =>{
 
     return(
         <div className="lista de horas">
@@ -17,6 +18,7 @@ const HoraList:React.FC<HoraListProps> = ({listaHoras}) =>{
                     {listaHoras.map((item) => (
                         <li key={item.id}>
                         <strong>{item.hora}</strong>
+                        <button className="btnEliminar" onClick={()=> eliminarHora(item.id)}>Eliminar</button>
                         </li>
                     ))}
                 </ul>

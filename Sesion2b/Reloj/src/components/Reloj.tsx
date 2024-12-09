@@ -44,11 +44,16 @@ const Reloj:React.FC = ():JSX.Element=>{
         //listaHoras al ser inmutable debe actualizarse así
         setlistaHoras([...listaHoras,nuevaHora]);
     }
+
+    const eliminarHora = (id:number)=>{
+        setlistaHoras(listaHoras.filter((item)=> item.id !== id))
+    }
+    
     return(
         <>
             <RelojDisplay time={time}/>
             <button onClick={guardarHora}>Guardar Hora</button>
-            <HoraList listaHoras={listaHoras}/>
+            <HoraList listaHoras={listaHoras} eliminarHora={eliminarHora}/>
         </>
     );
 };
