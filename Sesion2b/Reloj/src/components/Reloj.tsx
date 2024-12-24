@@ -16,8 +16,8 @@ const Reloj:React.FC = ():JSX.Element=>{
         return horasGuardadas ? JSON.parse(horasGuardadas): [];
     });
     //Con el segundo argumento como [] lo que hacemos es que solo se ejecuta al montar el componente
-    //Cuando se ejecuta llamara a un setTime y espera un segundo y hace que el estado time se actualice,
-    // lo que hará que se renderice la pagina de nuevo con el uevo valor de time y asi cada segundo.
+    //Cuando se ejecuta llamará a un setTime y espera un segundo y hace que el estado time se actualice,
+    // lo que hará que se renderice la pagina de nuevo con el nuevo valor de time y asi cada segundo.
     useEffect(()=>{
         console.log("elemento montado")
         const intervalo = setInterval(()=>{
@@ -53,8 +53,10 @@ const Reloj:React.FC = ():JSX.Element=>{
 
     return(
         <>
-            <RelojDisplay time={time}/>
+            {/* Componente mencionado en el txt de descripción  */}
+            <RelojDisplay time={time}/> 
             <button onClick={guardarHora}>Guardar Hora</button>
+            {/* Componente mencionado en el txt de descripción  */}
             <HoraList listaHoras={listaHoras} eliminarHora={eliminarHora}/>
         </>
     );
