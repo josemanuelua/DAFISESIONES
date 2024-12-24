@@ -4,6 +4,7 @@ import { findElement, getItems, createElementVM} from "../viewmodel/itemsViewMod
 
 export const useItemsViewModel = ()=>{
     const [items] = useState<Item[]>(getItems());
+    const [filtereditems, setFilteredItems] = useState<Item[]>(items);
     const [selectedItem, setSelectedItem] = useState<Item | null>(null);
     var newitem:Item = {id:0, name:'', price:0};
     const selectItemById = (id:number)=>{
@@ -20,7 +21,17 @@ export const useItemsViewModel = ()=>{
         newitem = {id:0, name:'', price:0};
 
     }
-    return {items, selectedItem, selectItemById, createElement};
+
+    const filterElements = (cadenabusqueda:string) =>{
+        
+        setFilteredItems (items.filter((item)=> item.name.toLocaleLowerCase().includes(cadenabusqueda.toLocaleLowerCase())));
+    }
+
+    const resetFilter = () => { 
+        setFilteredItems(items);
+    }
+
+    return {items, filtereditems, selectedItem, selectItemById, createElement, filterElements, resetFilter};
 };
 
 
