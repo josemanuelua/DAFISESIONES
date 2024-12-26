@@ -2,24 +2,31 @@ import { useState } from "react";
 import { Item } from "../api/api";
 import { findElement, getItems, createElementVM} from "../viewmodel/itemsViewModel";
 
+
+
 export const useItemsViewModel = ()=>{
     const [items] = useState<Item[]>(getItems());
     const [filtereditems, setFilteredItems] = useState<Item[]>(items);
     const [selectedItem, setSelectedItem] = useState<Item | null>(null);
-    var newitem:Item = {id:0, name:'', price:0};
+    const [modalMessage, setModalMessage] = useState("");
+    const [isModalOpen, setIsModalOpen]= useState(false);
+
     const selectItemById = (id:number)=>{
         const item =findElement(id);
         if (item) setSelectedItem(item);
-        else alert("Item no encontrado");
+        else{
+            setModalMessage("Item no encontrado");
+            setIsModalOpen(true);
+        } 
     };
 
     const createElement = (id:number,nombre:string, precio:number) =>{
-        newitem.id = id;
-        newitem.name = nombre;
-        newitem.price = precio;
+        const newitem:Item ={
+            id: id,
+            name: nombre,
+            price: precio
+        };
         createElementVM(newitem);
-        newitem = {id:0, name:'', price:0};
-
     }
 
     const filterElements = (cadenabusqueda:string) =>{
@@ -31,7 +38,7 @@ export const useItemsViewModel = ()=>{
         setFilteredItems(items);
     }
 
-    return {items, filtereditems, selectedItem, selectItemById, createElement, filterElements, resetFilter};
+    return {items, filtereditems, selectedItem, selectItemById, createElement, filterElements, resetFilter, modalMessage, setModalMessage, isModalOpen, setIsModalOpen};
 };
 
 

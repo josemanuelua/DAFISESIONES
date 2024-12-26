@@ -1,4 +1,4 @@
-import {Link, Outlet} from "react-router-dom"
+import {NavLink, Outlet} from "react-router-dom"
 import Header from "./Header";
 
 const Help = ():React.JSX.Element =>{
@@ -8,7 +8,7 @@ const Help = ():React.JSX.Element =>{
     <div>
         <Header />
         <h1>Pagina Ayuda</h1>
-        <nav><Link to="referencia">Referencia</Link> | <Link to="preguntas">Preguntas frecuentes</Link></nav>
+        <nav><NavLink to="referencia">Referencia</NavLink> | <NavLink to="preguntas">Preguntas frecuentes</NavLink></nav>
         <Outlet/>
     </div>
         

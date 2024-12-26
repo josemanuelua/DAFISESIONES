@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import { useItemsViewModel } from "../hook/useItemsViewModel";
+import Modal from './Modal/Modal';
 
 const ItemsList: React.FC = () => {
-    const { items, filtereditems, selectedItem, selectItemById, createElement, filterElements, resetFilter } = useItemsViewModel();
+    const { items, filtereditems, selectedItem, selectItemById, createElement, filterElements, resetFilter, modalMessage, setModalMessage, isModalOpen, setIsModalOpen } = useItemsViewModel();
     const [searchId, setSearchId] = useState("");
     const [insertarName, setInsertarName] = useState("");
     const [insertarPrecio, setinsertarPrecio] = useState("");
     const [busqueda, setBusqueda] = useState("");
     const [crear_Estado, setCrear_Estado] = useState(false);
- 
+
 
     const handleSearch = () => {
         const id = parseInt(searchId, 10);
-        if (isNaN(id)) alert("El id debe ser un numero entero")
+        if (isNaN(id)){
+            setModalMessage("El id debe ser un numero entero");
+            setIsModalOpen(true);
+        } 
         else selectItemById(id);
     }
     const handleNuevo = ()=>{
@@ -22,7 +26,8 @@ const ItemsList: React.FC = () => {
     const handleInsertar=()=>{
         const precio = parseFloat(insertarPrecio);
         if(isNaN(precio)){
-            alert("El precio debe de ser un numero");
+            setModalMessage("El precio debe de ser un numero");
+            setIsModalOpen(true);
         }else{
             createElement(items.length,insertarName,precio);
             setCrear_Estado(false);
@@ -41,13 +46,18 @@ const ItemsList: React.FC = () => {
 
     return (
         <div>
+            <div id="buscar">
+                <input type="text" placeholder="Buscar por ID" value={searchId} onChange={(e) => setSearchId(e.target.value)} />
+                <button onClick={handleSearch}>Buscar</button>
+                <button onClick={handleNuevo}>Nuevo Elemento</button>
+            </div>
+            <div id="filtrar">
+                <input type="text" placeholder="Cadena de búsqueda" onChange={(e) => setBusqueda(e.target.value)} />
+                <button onClick={handleFiltrar}>Filtrar</button>
+                <button onClick={handleMostrarTodo}>Mostrar Todo</button>
+            </div>
+
             <h2>Lista de productos</h2>
-            <input type="text" placeholder="Buscar por ID" value={searchId} onChange={(e) => setSearchId(e.target.value)} />
-            <button onClick={handleSearch}>Buscar</button>
-            <button onClick={handleNuevo}>Nuevo Elemento</button>
-            <input type="text" placeholder="Cadena de búsqueda" onChange={(e) => setBusqueda(e.target.value)} />
-            <button onClick={handleFiltrar}>Filtrar</button>
-            <button onClick={handleMostrarTodo}>Mostrar Todo</button>
             <ul>
                 {filtereditems.map((item) => (
                     <li key={item.id} onClick={() => selectItemById(item.id)}>
@@ -74,6 +84,9 @@ const ItemsList: React.FC = () => {
                     <button onClick={handleInsertar}>Insertar</button>
                 </div>
             )}
+            <Modal isOpen={isModalOpen} onClose={()=>setIsModalOpen(false)} title="Atención">
+                <p>{modalMessage}</p>
+            </Modal>
         </div>
 
     );
