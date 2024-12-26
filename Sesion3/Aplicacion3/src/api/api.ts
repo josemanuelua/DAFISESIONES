@@ -19,6 +19,7 @@ export const findElementByIdAPI = (id:number):Item | null=>{
     return items.find((item)=> item.id === id) || null;
 };
 
+//funcion para agregar un item nuevo a la lista de items.
 export const createElementByAPI = (item:Item) => {
     items.push(item);
 }

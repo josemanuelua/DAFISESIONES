@@ -7,7 +7,7 @@ const Help = ():React.JSX.Element =>{
    
     <div>
         <Header />
-        <h1>Pagina Ayuda</h1>
+        <h1>Página Ayuda</h1>
         <nav><NavLink to="referencia">Referencia</NavLink> | <NavLink to="preguntas">Preguntas frecuentes</NavLink></nav>
         <Outlet/>
     </div>

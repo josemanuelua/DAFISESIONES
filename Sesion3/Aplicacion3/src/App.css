@@ -26,6 +26,37 @@ nav a.active {
   text-decoration: none;
 }
 
+.formulario{
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+  align-items: stretch;
+  padding: 50px;
+}
+
+/* Estilos para que se vea como un botón */
+.button-link {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  text-decoration: none;  /* Eliminar subrayado */
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.button-link:hover {
+  background-color: #0056b3; /* Cambia el color al pasar el mouse */
+}
+
+.button-link:active {
+  background-color: #003366; /* Color cuando se presiona */
+}
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);

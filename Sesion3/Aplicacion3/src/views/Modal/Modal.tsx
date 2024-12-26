@@ -1,13 +1,14 @@
 import React from "react";
 import './Modal.css'
 
-type ModalProps = {
+interface ModalProps{
     isOpen: boolean;
     onClose: ()=> void;
     title: string;
     children: React.ReactNode;
-
 };
+
+//El modal se visualizará o no en ItemList dependiendo de si isOpen es true o false
 const Modal:React.FC<ModalProps> = ({isOpen,onClose,title,children})=>{
     if(!isOpen) return null;
     return(
